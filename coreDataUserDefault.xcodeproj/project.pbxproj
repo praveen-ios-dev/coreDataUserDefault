@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0309EA626B29E4C00FB0862 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0309EA526B29E4C00FB0862 /* SceneDelegate.swift */; };
 		F048E1CC26B29724005D242B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048E1CB26B29724005D242B /* AppDelegate.swift */; };
-		F048E1CE26B29724005D242B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048E1CD26B29724005D242B /* SceneDelegate.swift */; };
-		F048E1D026B29724005D242B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048E1CF26B29724005D242B /* ViewController.swift */; };
+		F048E1D026B29724005D242B /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048E1CF26B29724005D242B /* ToDoListViewController.swift */; };
 		F048E1D326B29724005D242B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048E1D126B29724005D242B /* Main.storyboard */; };
 		F048E1D526B29726005D242B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F048E1D426B29726005D242B /* Assets.xcassets */; };
 		F048E1D826B29726005D242B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048E1D626B29726005D242B /* LaunchScreen.storyboard */; };
@@ -35,10 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F0309EA526B29E4C00FB0862 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F048E1C826B29724005D242B /* coreDataUserDefault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coreDataUserDefault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F048E1CB26B29724005D242B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F048E1CD26B29724005D242B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F048E1CF26B29724005D242B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F048E1CF26B29724005D242B /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		F048E1D226B29724005D242B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F048E1D426B29726005D242B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F048E1D726B29726005D242B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,9 +99,9 @@
 		F048E1CA26B29724005D242B /* coreDataUserDefault */ = {
 			isa = PBXGroup;
 			children = (
+				F0309EA526B29E4C00FB0862 /* SceneDelegate.swift */,
 				F048E1CB26B29724005D242B /* AppDelegate.swift */,
-				F048E1CD26B29724005D242B /* SceneDelegate.swift */,
-				F048E1CF26B29724005D242B /* ViewController.swift */,
+				F048E1CF26B29724005D242B /* ToDoListViewController.swift */,
 				F048E1D126B29724005D242B /* Main.storyboard */,
 				F048E1D426B29726005D242B /* Assets.xcassets */,
 				F048E1D626B29726005D242B /* LaunchScreen.storyboard */,
@@ -258,9 +258,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F048E1D026B29724005D242B /* ViewController.swift in Sources */,
+				F048E1D026B29724005D242B /* ToDoListViewController.swift in Sources */,
 				F048E1CC26B29724005D242B /* AppDelegate.swift in Sources */,
-				F048E1CE26B29724005D242B /* SceneDelegate.swift in Sources */,
+				F0309EA626B29E4C00FB0862 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +437,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G385H7W25Y;
 				INFOPLIST_FILE = coreDataUserDefault/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -455,6 +456,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G385H7W25Y;
 				INFOPLIST_FILE = coreDataUserDefault/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
