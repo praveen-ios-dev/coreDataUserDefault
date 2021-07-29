@@ -8,8 +8,26 @@
 import UIKit
 
 class ToDoListViewController: UITableViewController{
-
-    let itemArray = ["Praveen", "lalu", "bulbul"]
+    @IBAction func additemButtonTapped(_ sender: Any) {
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add New todoe item", message: "", preferredStyle: .alert)
+        alert.addTextField { (textfield) in
+            textfield.placeholder = "Add new items"
+            textField = textfield
+        }
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            if let text = textField.text{
+                self.itemArray.append(text)
+            }
+            self.tableView.reloadData()
+        }
+        let action2 = UIAlertAction(title: "Cancle", style: .destructive, handler: nil)
+        alert.addAction(action)
+        alert.addAction(action2)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    var itemArray = ["Praveen", "lalu", "bulbul"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -31,7 +31,14 @@
                             <outlet property="delegate" destination="Gp2-x0-NbH" id="VEv-m8-aoE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoe" id="kia-4w-hOZ"/>
+                    <navigationItem key="navigationItem" title="Todoe" id="kia-4w-hOZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YeN-dQ-RXR">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="additemButtonTapped:" destination="Gp2-x0-NbH" id="pZm-PM-cw3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJF-y9-f3m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
