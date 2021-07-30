@@ -9,6 +9,10 @@ import UIKit
 
 class ToDoListViewController: UITableViewController{
     let defaults = UserDefaults()
+    var itemArray : [Item] = []
+    
+    
+    
     
     @IBAction func additemButtonTapped(_ sender: Any) {
         var textField = UITextField()
@@ -19,7 +23,9 @@ class ToDoListViewController: UITableViewController{
         }
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             if let text = textField.text{
-                self.itemArray.append(text)
+                let item = Item()
+                item.name = text
+                self.itemArray.append(item)
             }
             self.tableView.reloadData()
             self.defaults.set(self.itemArray, forKey: "savedItemArray")
@@ -28,11 +34,17 @@ class ToDoListViewController: UITableViewController{
         present(alert, animated: true, completion: nil)
     }
     
-    var itemArray : [String] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let value = defaults.array(forKey: "savedItemArray") as? [String]{
+        let item = Item()
+        item.name = "Kumar"
+        itemArray.append(item)
+        let item1 = Item()
+        item1.name = "praveen"
+        itemArray.append(item1)
+        if let value = defaults.object(forKey: "savedItemArray") as? [Item]{
             itemArray = value
         }
     }
@@ -44,19 +56,18 @@ class ToDoListViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath)
-        cell.textLabel?.text = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
+        cell.textLabel?.text = item.name
+        cell.accessoryType = item.done ? .checkmark : .none
         return cell
     }
     
     //Delegate Method
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark{
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        }else{
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
     }
 
 }
