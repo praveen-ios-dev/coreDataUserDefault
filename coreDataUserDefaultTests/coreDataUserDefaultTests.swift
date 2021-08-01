@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import coreDataUserDefault
+
 
 class coreDataUserDefaultTests: XCTestCase {
 

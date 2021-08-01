@@ -6,36 +6,45 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UITableViewController{
     let defaults = UserDefaults()
-    var itemArray : [Item] = []
-    let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
+    var itemArray : [Items] = []
+    var catagory : CatagoryItem?{
+        didSet{
+            loadData()
+        }
+    }
+    let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     
     // MARK:- Override Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.barTintColor = UIColor.black
         loadData()
-        
     }
     
-    fileprivate func loadData(){
-        if let data = try? Data(contentsOf: filePath!){
-            let decoder = PropertyListDecoder()
-            do{
-                itemArray = try decoder.decode([Item].self, from : data)
-            }catch{
-                print("error = \(error)")
-            }
-            
+    fileprivate func loadData(_ request: NSFetchRequest<Items> = Items.fetchRequest(), predicate :NSPredicate? = nil) {
+        let contexPredicate = NSPredicate(format: "child.name MATCHES %@", catagory!.name!)
+        if let predicate = predicate{
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [contexPredicate,predicate])
+        }else{
+            request.predicate = contexPredicate
+        }
+        
+        do{
+            itemArray = try contex.fetch(request)
+        }catch{
+            print("Got an error in saving data to persistant manager \(error)")
         }
     }
-    
+
     fileprivate func saveItem() {
-        let encoder = PropertyListEncoder()
         do{
-            let data = try encoder.encode(self.itemArray)
-            try data.write(to: self.filePath!)
+            try contex.save()
+            loadData()
         }catch{
             print("data encoded filePath error \(error)")
         }
@@ -56,9 +65,12 @@ class ToDoListViewController: UITableViewController{
         }
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             if let text = textField.text , !text.isEmpty{
-                let item = Item()
-                item.name = text
-                self.itemArray.append(item)
+                let value = Items(context: self.contex)
+                value.title = text
+                self.itemArray.append(value)
+                value.child = self.catagory
+                print(self.itemArray.count)
+                
                 self.saveItem()
             }
         }
@@ -76,18 +88,43 @@ class ToDoListViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath)
         let item = itemArray[indexPath.row]
-        cell.textLabel?.text = item.name
+        cell.textLabel?.text = item.title
         cell.accessoryType = item.done ? .checkmark : .none
         return cell
     }
+    
     
     //Delegate Method
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        //contex.delete(itemArray[indexPath.row])
         saveItem()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+}
+
+extension ToDoListViewController : UISearchBarDelegate{
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count != 0{
+            let Request : NSFetchRequest<Items> = Items.fetchRequest()
+            let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+            Request.predicate = predicate
+            Request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+            loadData(Request,predicate: predicate)
+            tableView.reloadData()
+        }else{
+            let Request : NSFetchRequest<Items> = Items.fetchRequest()
+            loadData(Request)
+            tableView.reloadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            
+        }
+
+    }
 }
 
